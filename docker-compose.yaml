@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  signal-api:
+    image: bbernhard/signal-cli-rest-api:latest
+    volumes:
+      - ./signal-cli-config:/home/.local/share/signal-cli
+    environment:
+      - MODE=json-rpc
+
+  bot:
+    build: .
+    depends_on:
+      - signal-api
+    environment:
+      - SIGNAL_SERVICE=signal-api:8080
+      - PHONE_NUMBER=${PHONE_NUMBER}

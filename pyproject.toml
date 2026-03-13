@@ -1,0 +1,13 @@
+[project]
+name = "signal-embed-bot"
+version = "0.1.0"
+description = "A Signal bot that downloads videos and sends them as attachments"
+readme = "README.md"
+requires-python = ">=3.13"
+license = "MIT"
+dependencies = [
+    "signalbot>=0.25.0",
+    "python-dotenv>=1.0.0",
+    "pytest>=7.0.0",
+    "yt-dlp>=2026.3.3",
+]

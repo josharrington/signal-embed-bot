@@ -61,7 +61,7 @@ Before running the bot, you need to link your Signal account with the Signal CLI
    ```
 
 2. **Link your Signal account**:
-   Open [http://127.0.0.1:8080/v1/qrcodelink?device_name=local](http://127.0.0.1:8080/v1/qrcodelink?device_name=local) in your browser to generate a QR code.
+   Open [http://localhost:8080/v1/qrcodelink?device_name=SignalEmbedBot](http://127.0.0.1:8080/v1/qrcodelink?device_name=SignalEmbedBot) in your browser to generate a QR code.
 
 3. **Scan the QR code**:
    In your Signal app, go to Settings > Linked Devices > Link New Device, and scan the QR code displayed in the browser. The server can now receive and send messages. The access key will be stored in the `signal-cli-config` directory.
