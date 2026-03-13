@@ -7,23 +7,23 @@ from signalbot import Command, regex_triggered, Context
 import yt_dlp
 
 
-class UploadTikTokCommand(Command):
+class UploadInstagramCommand(Command):
     """
-    Triggers on any message containing 'www.tiktok.com'.
-    Downloads the TikTok video and sends it as a file attachment.
+    Triggers on any message containing 'www.instagram.com'.
+    Downloads the Instagram video and sends it as a file attachment.
     """
 
-    def extract_tiktok_url(self, text: str) -> str | None:
-        """Extract the first TikTok URL from the text."""
-        match = re.search(r"(?:www\.)?tiktok\.com/\S+", text)
+    def extract_instagram_url(self, text: str) -> str | None:
+        """Extract the first Instagram URL from the text."""
+        match = re.search(r"(?:www\.)?instagram\.com/\S+", text)
         return match.group(0) if match else None
 
-    @regex_triggered(r"www\.tiktok\.com")
+    @regex_triggered(r"www\.instagram\.com")
     async def handle(self, ctx: Context) -> None:
         original_text = ctx.message.text
-        tiktok_url = self.extract_tiktok_url(original_text)
+        instagram_url = self.extract_instagram_url(original_text)
 
-        if not tiktok_url:
+        if not instagram_url:
             return
 
         # Download the video using yt-dlp
@@ -37,7 +37,7 @@ class UploadTikTokCommand(Command):
 
             try:
                 with yt_dlp.YoutubeDL(ydl_opts) as ydl:  # type: ignore
-                    info = ydl.extract_info(tiktok_url, download=True)
+                    info = ydl.extract_info(instagram_url, download=True)
                     filename = ydl.prepare_filename(info)
 
                 # Read the downloaded file and encode as base64
@@ -48,7 +48,7 @@ class UploadTikTokCommand(Command):
                 # Send the video as an attachment
                 video_filename = Path(filename).name
                 await ctx.send(
-                    f"[BOT] Attached TikTok Video: {video_filename}",
+                    f"[BOT] Attached Instagram Video: {video_filename}",
                     base64_attachments=[base64_data],
                 )
 
